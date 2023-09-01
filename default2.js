@@ -9,7 +9,7 @@ console.log('Git tags:', tags);
 // Function to read and parse the commit history
 function readCommitHistory() {
     let commitHistory = ""
-    if ( tags.length > 0 && tags[0] != '') {
+    if (tags.length > 0 && tags[0] != '') {
         const latestTag = execSync('git describe --tags --abbrev=0', { encoding: 'utf-8' }).trim();
         // Get the commits since the latest tag
         commitHistory = execSync(`git log ${latestTag}..main --oneline`, { encoding: 'utf-8' });
@@ -31,7 +31,7 @@ function generateChangelog(commits) {
     commits.forEach((commit) => {
         const [hash, typeAndScope, message] = commit.split(/(?<=\w) (BREAKING CHANGE|feat|fix|fix\(.*\)|feat\(.*\)|feature):/);
         let type, scope;
-        if (typeAndScope){
+        if (typeAndScope) {
             if (typeAndScope.includes('(') && typeAndScope.includes(')')) {
                 [type, scope] = typeAndScope.split(/\(|\)/);
             } else {
@@ -147,7 +147,14 @@ function writeChangelog(changelog) {
         if (changelog[change].length > 0) {
             changelogContent += "### " + change + ':\n' + formatChangelogEntries(changelog[change]);
         }
-    fs.writeFileSync('CHANGELOG.md', changelogContent, 'utf-8');
+    try {
+        // Attempt to append to the changelog file
+        fs.appendFileSync('CHANGELOG.md', changelogContent, 'utf-8');
+        return true; // Return true if successful
+    } catch (error) {
+        console.error('Error appending to changelog:', error);
+        return false; // Return false if an error occurred
+    }
 }
 
 
@@ -156,6 +163,15 @@ function createCurrentReleaseFile(latestVersion, latestCommits) {
     const currentReleaseContentWithCommits = formatChangelogEntries(latestCommits);
 
     fs.writeFileSync('CURRENT_RELEASE.md', currentReleaseContent + currentReleaseContentWithCommits, 'utf-8');
+}
+
+function createTag(newVersion) {
+    let commitHistory = ""
+
+    commitHistory = execSync(`git tag v${newVersion}`, { encoding: 'utf-8' });
+    // const commitHistory = execSync(`git log ${latestTag}..main --oneline`, { encoding: 'utf-8' }).trim().split('\n');
+    console.log('Commits create latest tag:', commitHistory);
+
 }
 
 // Main function
@@ -170,9 +186,13 @@ function main() {
         const changelog = generateChangelog(commits);
         console.log(`Current Version: ${currentVersion}`);
         console.log(`New Version: ${newVersion}`);
-    
+
         writePackageVersion(newVersion)
-        writeChangelog(changelog);
+        write = writeChangelog(changelog);
+        if (write) {
+            createTag(newVersion);
+        }
+        console.log(write)
     }
 
 }
