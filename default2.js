@@ -110,6 +110,15 @@ function getLatestVersion() {
     const packageJson = JSON.parse(fs.readFileSync('package.json', 'utf-8'));
     return packageJson.version;
 }
+// Function to write changelog to a file
+function writeChangelog(changelog) {
+    let changelogContent = `# VERSIONING: version ${getLatestVersion()}\n\n`;
+    for (const change in changelog)
+        if (changelog[change].length > 0) {
+            changelogContent += change + ':\n' + formatChangelogEntries(changelog[change]);
+        }
+    fs.writeFileSync('CHANGELOG.md', changelogContent, 'utf-8');
+}
 
 // Main function
 function main() {
