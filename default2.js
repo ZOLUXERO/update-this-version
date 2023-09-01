@@ -1,5 +1,6 @@
 const fs = require('fs');
 const { execSync } = require('child_process');
+const path = require('path');
 
 // Function to read and parse the commit history
 function readCommitHistory() {
@@ -15,20 +16,26 @@ function generateChangelog(commits) {
     };
 
     commits.forEach((commit) => {
-        const [hash, message] = commit.split(' BREAKING CHANGE: ');
+        const [hash, typeAndScope, message] = commit.split(/(?<=\w) (BREAKING CHANGE|feat|fix|fix\(.*\)|feat\(.*\)|feature):/);
+        let type, scope;
+        if (typeAndScope){
+            if (typeAndScope.includes('(') && typeAndScope.includes(')')) {
+                [type, scope] = typeAndScope.split(/\(|\)/);
+            } else {
+                type = typeAndScope;
+                scope = "";
+            }
+        }
+
         console.log(commit)
-        // Determine the type based on the presence of "BREAKING CHANGE"
-        const type = commit.includes('BREAKING CHANGE') ? 'BREAKING CHANGE' : message;
         console.log("============")
-        // console.log(type)
-        console.log(hash, "|", type, "|", message)
+        console.log(hash, "|", typeAndScope, "|", message, "|", type, "|", scope)
         console.log("============")
-        // Extract the version from the message
 
         if (message != undefined) {
             console.log("inside: ", message, type, hash)
             if (type) {
-                changelog[type].push({ hash, version: type, message: message });
+                changelog[type].push({ hash, scope: scope, message: message });
             }
         }
 
@@ -38,7 +45,7 @@ function generateChangelog(commits) {
 }
 // Helper function to format changelog entries
 function formatChangelogEntries(entries) {
-    return entries.map(({ hash, message }) => `(${hash}): ${message}`).join('\n') + '\n';
+    return entries.map(({ hash, scope, message }) => `- **${scope}** ${message} ([${hash}](http://test.com))`).join('\n') + '\n';
 }
 
 // Helper function to get the latest version
@@ -76,7 +83,7 @@ function calculateCommitWeights(commits) {
 // Function to determine the version upgrade based on weights
 function determineVersionUpgrade(weightCounts, currentVersion) {
     const weightOrder = ['BREAKING CHANGE', 'feat', 'fix'];
-    let maxWeightType = 'fix';
+    let maxWeightType = 'BREAKING CHANGE';
 
     for (const type of weightOrder) {
         if (weightCounts[type] > weightCounts[maxWeightType]) {
@@ -87,11 +94,11 @@ function determineVersionUpgrade(weightCounts, currentVersion) {
     if (maxWeightType === 'BREAKING CHANGE') {
         // If there are BREAKING CHANGE commits, increment major version
         const [major, minor, patch] = currentVersion.split('.').map(Number);
-        return `${major + 1}.0.0`;
+        return `${major + 1}.${minor}.${patch}`;
     } else if (maxWeightType === 'feat') {
         // If there are feat commits, increment minor version
         const [major, minor, patch] = currentVersion.split('.').map(Number);
-        return `${major}.${minor + 1}.0`;
+        return `${major}.${minor + 1}.${patch}`;
     } else {
         // If there are only fix commits, increment patch version
         const [major, minor, patch] = currentVersion.split('.').map(Number);
@@ -112,10 +119,10 @@ function getLatestVersion() {
 }
 // Function to write changelog to a file
 function writeChangelog(changelog) {
-    let changelogContent = `# VERSIONING: version ${getLatestVersion()}\n\n`;
+    let changelogContent = `## VERSIONING: version ${getLatestVersion()}\n\n`;
     for (const change in changelog)
         if (changelog[change].length > 0) {
-            changelogContent += change + ':\n' + formatChangelogEntries(changelog[change]);
+            changelogContent += "### " + change + ':\n' + formatChangelogEntries(changelog[change]);
         }
     fs.writeFileSync('CHANGELOG.md', changelogContent, 'utf-8');
 }
