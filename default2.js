@@ -2,9 +2,22 @@ const fs = require('fs');
 const { execSync } = require('child_process');
 const path = require('path');
 
+const tags = execSync('git tag', { encoding: 'utf-8' }).trim().split('\n');
+console.log('Git tags:', tags);
+
+
 // Function to read and parse the commit history
 function readCommitHistory() {
-    const commitHistory = execSync('git log --oneline', { encoding: 'utf-8' });
+    let commitHistory = ""
+    if ( tags.length > 0 && tags[0] != '') {
+        const latestTag = execSync('git describe --tags --abbrev=0', { encoding: 'utf-8' }).trim();
+        // Get the commits since the latest tag
+        commitHistory = execSync(`git log ${latestTag}..main --oneline`, { encoding: 'utf-8' });
+        // const commitHistory = execSync(`git log ${latestTag}..main --oneline`, { encoding: 'utf-8' }).trim().split('\n');
+        console.log('Commits since latest tag:', commitHistory);
+    } else {
+        commitHistory = execSync('git log --oneline', { encoding: 'utf-8' });
+    }
     return commitHistory.trim().split('\n');
 }
 
@@ -137,29 +150,6 @@ function writeChangelog(changelog) {
     fs.writeFileSync('CHANGELOG.md', changelogContent, 'utf-8');
 }
 
-function getLastVersionFromChangelog() {
-    const changelogContent = fs.readFileSync('CHANGELOG.md', 'utf-8');
-    const versionRegex = /## VERSIONING: version (\d+\.\d+\.\d+)/g;
-    const versions = [...changelogContent.matchAll(versionRegex)];
-    return versions.length > 0 ? versions[versions.length - 1][1] : '0.0.0';
-}
-
-// Function to add new commit hashes to the changelog
-function updateChangelogWithNewCommits(changelog, newCommits) {
-    const lastVersion = getLastVersionFromChangelog();
-    let changelogContent = fs.readFileSync('CHANGELOG.md', 'utf-8');
-    changelogContent += `\n\n## VERSIONING: version ${getLatestVersion()} (${getCurrentDate()})\n\n`;
-
-    for (const change in changelog) {
-        if (changelog[change].length > 0) {
-            changelogContent += "### " + change + ':\n' + formatChangelogEntries(changelog[change]);
-        }
-    }
-
-    // Add new commits to the changelog under the latest version
-    changelogContent += formatChangelogEntries(newCommits);
-    fs.writeFileSync('CHANGELOG.md', changelogContent, 'utf-8');
-}
 
 function createCurrentReleaseFile(latestVersion, latestCommits) {
     const currentReleaseContent = `## VERSIONING: version ${latestVersion} (${getCurrentDate()})\n\n`;
@@ -171,19 +161,20 @@ function createCurrentReleaseFile(latestVersion, latestCommits) {
 // Main function
 function main() {
     const commits = readCommitHistory();
-    const weightCounts = calculateCommitWeights(commits);
-    const currentVersion = getLatestVersion();
-    const newVersion = determineVersionUpgrade(weightCounts, currentVersion);
-    const changelog = generateChangelog(commits);
+    console.log("commit since", commits);
+    if (commits.length > 0 && commits[0] != "") {
 
-    console.log(`Current Version: ${currentVersion}`);
-    console.log(`New Version: ${newVersion}`);
+        const weightCounts = calculateCommitWeights(commits);
+        const currentVersion = getLatestVersion();
+        const newVersion = determineVersionUpgrade(weightCounts, currentVersion);
+        const changelog = generateChangelog(commits);
+        console.log(`Current Version: ${currentVersion}`);
+        console.log(`New Version: ${newVersion}`);
+    
+        writePackageVersion(newVersion)
+        writeChangelog(changelog);
+    }
 
-    writePackageVersion(newVersion)
-    writeChangelog(changelog);;
-    const newCommits = changelog[newVersion] || []; // Get new commits for the latest version
-    updateChangelogWithNewCommits(changelog, newCommits);
-    createCurrentReleaseFile(newVersion, newCommits);
 }
 
 main();
