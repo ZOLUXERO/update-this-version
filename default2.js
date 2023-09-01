@@ -117,14 +117,55 @@ function getLatestVersion() {
     const packageJson = JSON.parse(fs.readFileSync('package.json', 'utf-8'));
     return packageJson.version;
 }
+
+function getCurrentDate() {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0'); // Adding 1 as months are zero-indexed
+    const day = String(today.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+}
+
 // Function to write changelog to a file
 function writeChangelog(changelog) {
-    let changelogContent = `## VERSIONING: version ${getLatestVersion()}\n\n`;
+    const currentDate = getCurrentDate();
+    let changelogContent = `## VERSIONING: version ${getLatestVersion()} (${currentDate})\n\n`;
     for (const change in changelog)
         if (changelog[change].length > 0) {
             changelogContent += "### " + change + ':\n' + formatChangelogEntries(changelog[change]);
         }
     fs.writeFileSync('CHANGELOG.md', changelogContent, 'utf-8');
+}
+
+function getLastVersionFromChangelog() {
+    const changelogContent = fs.readFileSync('CHANGELOG.md', 'utf-8');
+    const versionRegex = /## VERSIONING: version (\d+\.\d+\.\d+)/g;
+    const versions = [...changelogContent.matchAll(versionRegex)];
+    return versions.length > 0 ? versions[versions.length - 1][1] : '0.0.0';
+}
+
+// Function to add new commit hashes to the changelog
+function updateChangelogWithNewCommits(changelog, newCommits) {
+    const lastVersion = getLastVersionFromChangelog();
+    let changelogContent = fs.readFileSync('CHANGELOG.md', 'utf-8');
+    changelogContent += `\n\n## VERSIONING: version ${getLatestVersion()} (${getCurrentDate()})\n\n`;
+
+    for (const change in changelog) {
+        if (changelog[change].length > 0) {
+            changelogContent += "### " + change + ':\n' + formatChangelogEntries(changelog[change]);
+        }
+    }
+
+    // Add new commits to the changelog under the latest version
+    changelogContent += formatChangelogEntries(newCommits);
+    fs.writeFileSync('CHANGELOG.md', changelogContent, 'utf-8');
+}
+
+function createCurrentReleaseFile(latestVersion, latestCommits) {
+    const currentReleaseContent = `## VERSIONING: version ${latestVersion} (${getCurrentDate()})\n\n`;
+    const currentReleaseContentWithCommits = formatChangelogEntries(latestCommits);
+
+    fs.writeFileSync('CURRENT_RELEASE.md', currentReleaseContent + currentReleaseContentWithCommits, 'utf-8');
 }
 
 // Main function
@@ -140,6 +181,9 @@ function main() {
 
     writePackageVersion(newVersion)
     writeChangelog(changelog);;
+    const newCommits = changelog[newVersion] || []; // Get new commits for the latest version
+    updateChangelogWithNewCommits(changelog, newCommits);
+    createCurrentReleaseFile(newVersion, newCommits);
 }
 
 main();
