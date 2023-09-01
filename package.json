@@ -1,0 +1,11 @@
+{
+  "name": "update-this-version",
+  "version": "0.0.0",
+  "description": "Update this version using Semantic versioning",
+  "main": "default.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Aureliano Buendia",
+  "license": "ISC"
+}
