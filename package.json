@@ -1,6 +1,6 @@
 {
   "name": "update-this-version",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Update this version using Semantic versioning",
   "main": "default.js",
   "scripts": {
