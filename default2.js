@@ -70,16 +70,10 @@ function getLatestVersion() {
 
 // Function to calculate the weight of each commit type
 function calculateCommitWeights(commits) {
-    // const weights = {
-    //     'BREAKING CHANGE': 2,
-    //     feat: 1,
-    //     fix: 0,
-    // };
-
     const weightCounts = {
         'BREAKING CHANGE': 0,
-        feat: 0,
-        fix: 0,
+        'feat': 0,
+        'fix': 0,
     };
 
     commits.forEach((commit) => {
@@ -99,15 +93,15 @@ function determineVersionUpgrade(weightCounts, currentVersion) {
     const weightOrder = ['BREAKING CHANGE', 'feat', 'fix'];
     console.log(weightCounts)
 
-    if (weightOrder["BREAKING CHANGE"] > 0) {
+    if (weightCounts["BREAKING CHANGE"] > 0) {
         // If there are BREAKING CHANGE commits, increment major version
         const [major, minor, patch] = currentVersion.split('.').map(Number);
         return `${major + 1}.${minor}.${patch}`;
-    } else if (weightOrder["feat"] > 0) {
+    } else if (weightCounts["feat"] > 0) {
         // If there are feat commits, increment minor version
         const [major, minor, patch] = currentVersion.split('.').map(Number);
         return `${major}.${minor + 1}.${patch}`;
-    } else if (weightOrder["fix"] > 0) {
+    } else if (weightCounts["fix"] > 0) {
         // If there are only fix commits, increment patch version
         const [major, minor, patch] = currentVersion.split('.').map(Number);
         return `${major}.${minor}.${patch + 1}`;
