@@ -1,7 +1,6 @@
 const fs = require('fs');
 const { execSync } = require('child_process');
 const path = require('path');
-
 const tags = execSync('git tag', { encoding: 'utf-8' }).trim().split('\n');
 console.log('Git tags:', tags);
 
@@ -41,18 +40,11 @@ function generateChangelog(commits) {
             }
         }
 
-        console.log(commit)
-        console.log("============")
-        console.log(hash, "|", typeAndScope, "|", message, "|", type, "|", scope)
-        console.log("============")
-
         if (message != undefined) {
-            console.log("inside: ", message, type, hash)
             if (type) {
                 changelog[type].push({ hash, scope: scope, message: message });
             }
         }
-
     });
 
     return changelog;
