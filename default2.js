@@ -26,10 +26,11 @@ function generateChangelog(commits) {
         "BREAKING CHANGE": [],
         feat: [],
         fix: [],
+        test: [],
     };
 
     commits.forEach((commit) => {
-        const [hash, typeAndScope, message] = commit.split(/(?<=\w) (BREAKING CHANGE|feat|fix|fix\(.*\)|feat\(.*\)|feature):/);
+        const [hash, typeAndScope, message] = commit.split(/(?<=\w) (BREAKING CHANGE|feat|fix|test|fix\(.*\)|feat\(.*\)|test\(.*\)|feature):/);
         let type, scope;
         if (typeAndScope) {
             if (typeAndScope.includes('(') && typeAndScope.includes(')')) {
@@ -69,11 +70,11 @@ function getLatestVersion() {
 
 // Function to calculate the weight of each commit type
 function calculateCommitWeights(commits) {
-    const weights = {
-        'BREAKING CHANGE': 2,
-        feat: 1,
-        fix: 0,
-    };
+    // const weights = {
+    //     'BREAKING CHANGE': 2,
+    //     feat: 1,
+    //     fix: 0,
+    // };
 
     const weightCounts = {
         'BREAKING CHANGE': 0,
@@ -82,7 +83,7 @@ function calculateCommitWeights(commits) {
     };
 
     commits.forEach((commit) => {
-        for (const type in weights) {
+        for (const type in weightCounts) {
             if (commit.includes(type)) {
                 weightCounts[type]++;
                 break; // Move to the next commit once the type is found
@@ -96,24 +97,22 @@ function calculateCommitWeights(commits) {
 // Function to determine the version upgrade based on weights
 function determineVersionUpgrade(weightCounts, currentVersion) {
     const weightOrder = ['BREAKING CHANGE', 'feat', 'fix'];
-    let maxWeightType = 'BREAKING CHANGE';
+    console.log(weightCounts)
 
-    for (const type of weightOrder) {
-        if (weightCounts[type] > weightCounts[maxWeightType]) {
-            maxWeightType = type;
-        }
-    }
-
-    if (maxWeightType === 'BREAKING CHANGE') {
+    if (weightOrder["BREAKING CHANGE"] > 0) {
         // If there are BREAKING CHANGE commits, increment major version
         const [major, minor, patch] = currentVersion.split('.').map(Number);
         return `${major + 1}.${minor}.${patch}`;
-    } else if (maxWeightType === 'feat') {
+    } else if (weightOrder["feat"] > 0) {
         // If there are feat commits, increment minor version
         const [major, minor, patch] = currentVersion.split('.').map(Number);
         return `${major}.${minor + 1}.${patch}`;
-    } else {
+    } else if (weightOrder["fix"] > 0) {
         // If there are only fix commits, increment patch version
+        const [major, minor, patch] = currentVersion.split('.').map(Number);
+        return `${major}.${minor}.${patch + 1}`;
+    } else {
+        // Default to incrementing the patch version if no specific commits found
         const [major, minor, patch] = currentVersion.split('.').map(Number);
         return `${major}.${minor}.${patch + 1}`;
     }
@@ -149,7 +148,21 @@ function writeChangelog(changelog) {
         }
     try {
         // Attempt to append to the changelog file
-        fs.appendFileSync('CHANGELOG.md', changelogContent, 'utf-8');
+        // Check if the changelog file exists
+        if (fs.existsSync('CHANGELOG.md')) {
+            // Read the existing content of the changelog file
+            const existingContent = fs.readFileSync('CHANGELOG.md', 'utf-8');
+    
+            // Combine the new content with the existing content
+            const newChangelogContent = changelogContent + '\n\n' + existingContent;
+    
+            // Write the updated content back to the changelog file
+            fs.writeFileSync('CHANGELOG.md', newChangelogContent, 'utf-8');
+        } else {
+            // If the file doesn't exist, create it and write the new content
+            fs.appendFileSync('CHANGELOG.md', changelogContent, 'utf-8');
+        }
+
         return true; // Return true if successful
     } catch (error) {
         console.error('Error appending to changelog:', error);
