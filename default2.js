@@ -108,10 +108,11 @@ function writePackageVersion(newVersion) {
 }
 
 function getLatestVersion() {
-    if (fs.existsSync('package.json')) {
-        const packageJson = JSON.parse(fs.readFileSync('package.json', 'utf-8'));
-        return `${packageJson.version}`;
-    }
+    // TODO: validate if user wants to use package.json as source for versioning
+    // if (fs.existsSync('package.json')) {
+    //     const packageJson = JSON.parse(fs.readFileSync('package.json', 'utf-8'));
+    //     return `${packageJson.version}`;
+    // }
     let version = "0.0.0"
     if (tags.length > 0 && tags[0] != '') {
         version = execSync('git describe --tags --abbrev=0', { encoding: 'utf-8' }).trim();
