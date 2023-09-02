@@ -54,12 +54,6 @@ function formatChangelogEntries(entries) {
     return entries.map(({ hash, scope, message }) => `- **${scope}** ${message} ([${hash}](http://test.com))`).join('\n') + '\n';
 }
 
-// Helper function to get the latest version
-function getLatestVersion() {
-    const packageJson = JSON.parse(fs.readFileSync('package.json', 'utf-8'));
-    return packageJson.version;
-}
-
 // Function to calculate the weight of each commit type
 function calculateCommitWeights(commits) {
     const weightCounts = {
@@ -106,14 +100,23 @@ function determineVersionUpgrade(weightCounts, currentVersion) {
 
 // Function to write the updated version to package.json
 function writePackageVersion(newVersion) {
-    const packageJson = JSON.parse(fs.readFileSync('package.json', 'utf-8'));
-    packageJson.version = newVersion;
-    fs.writeFileSync('package.json', JSON.stringify(packageJson, null, 2), 'utf-8');
+    if (fs.existsSync('package.json')) {
+        const packageJson = JSON.parse(fs.readFileSync('package.json', 'utf-8'));
+        packageJson.version = newVersion;
+        fs.writeFileSync('package.json', JSON.stringify(packageJson, null, 2), 'utf-8');
+    }
 }
 
 function getLatestVersion() {
-    const packageJson = JSON.parse(fs.readFileSync('package.json', 'utf-8'));
-    return packageJson.version;
+    if (fs.existsSync('package.json')) {
+        const packageJson = JSON.parse(fs.readFileSync('package.json', 'utf-8'));
+        return `${packageJson.version}`;
+    }
+    let version = "0.0.0"
+    if (tags.length > 0 && tags[0] != '') {
+        version = execSync('git describe --tags --abbrev=0', { encoding: 'utf-8' }).trim();
+    }
+    return version.replace('v','')
 }
 
 function getCurrentDate() {
@@ -125,9 +128,9 @@ function getCurrentDate() {
 }
 
 // Function to write changelog to a file
-function writeChangelog(changelog) {
+function writeChangelog(changelog, version) {
     const currentDate = getCurrentDate();
-    let changelogContent = `## VERSIONING: version ${getLatestVersion()} (${currentDate})\n\n`;
+    let changelogContent = `## VERSIONING: version ${version} (${currentDate})\n\n`;
     for (const change in changelog)
         if (changelog[change].length > 0) {
             changelogContent += "### " + change + ':\n' + formatChangelogEntries(changelog[change]);
@@ -187,7 +190,7 @@ function main() {
         console.log(`New Version: ${newVersion}`);
 
         writePackageVersion(newVersion)
-        write = writeChangelog(changelog);
+        write = writeChangelog(changelog, newVersion);
         if (write) {
             createTag(newVersion);
         }
