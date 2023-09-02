@@ -4,6 +4,17 @@ const path = require('path');
 const tags = execSync('git tag', { encoding: 'utf-8' }).trim().split('\n');
 console.log('Git tags:', tags);
 
+function getGitUrlOrigin() {
+    let cleanedRemoteUrl = ""
+    try {
+        const remoteUrl = execSync('git config --get remote.origin.url', { encoding: 'utf-8' }).trim();
+        cleanedRemoteUrl = remoteUrl.replace(/\.git$/, '');
+        console.log('Remote URL without .git:', cleanedRemoteUrl);
+    } catch (error) {
+        console.error('Error:', error.message);
+    }
+    return cleanedRemoteUrl
+}
 
 // Function to read and parse the commit history
 function readCommitHistory() {
@@ -42,7 +53,7 @@ function generateChangelog(commits) {
 
         if (message != undefined) {
             if (type) {
-                changelog[type].push({ hash, scope: scope, message: message });
+                changelog[type].push({ hash, scope: scope, message: message, cleanedRemoteUrl: getGitUrlOrigin() });
             }
         }
     });
@@ -51,7 +62,7 @@ function generateChangelog(commits) {
 }
 // Helper function to format changelog entries
 function formatChangelogEntries(entries) {
-    return entries.map(({ hash, scope, message }) => `- **${scope}** ${message} ([${hash}](http://test.com))`).join('\n') + '\n';
+    return entries.map(({ hash, scope, message, cleanedRemoteUrl }) => `- **${scope}** ${message} ([${hash}](${cleanedRemoteUrl}/commit/${hash}))`).join('\n') + '\n';
 }
 
 // Function to calculate the weight of each commit type
@@ -117,7 +128,7 @@ function getLatestVersion() {
     if (tags.length > 0 && tags[0] != '') {
         version = execSync('git describe --tags --abbrev=0', { encoding: 'utf-8' }).trim();
     }
-    return version.replace('v','')
+    return version.replace('v', '')
 }
 
 function getCurrentDate() {
@@ -137,15 +148,14 @@ function writeChangelog(changelog, version) {
             changelogContent += "### " + change + ':\n' + formatChangelogEntries(changelog[change]);
         }
     try {
-        // Attempt to append to the changelog file
         // Check if the changelog file exists
         if (fs.existsSync('CHANGELOG.md')) {
             // Read the existing content of the changelog file
             const existingContent = fs.readFileSync('CHANGELOG.md', 'utf-8');
-    
+
             // Combine the new content with the existing content
             const newChangelogContent = changelogContent + '\n\n' + existingContent;
-    
+
             // Write the updated content back to the changelog file
             fs.writeFileSync('CHANGELOG.md', newChangelogContent, 'utf-8');
         } else {
