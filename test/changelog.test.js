@@ -33,7 +33,7 @@ describe('writeFile', () => {
 
         expect(fs.writeFileSync).toHaveBeenCalledWith(defaultValues.releasesFile, content, 'utf-8');
         // expect(console.error).toHaveBeenCalledWith('Error appending to file:', error);
-        // expect(result).toBe(false);
+        expect(result).toBe(false);
     });
 });
 
