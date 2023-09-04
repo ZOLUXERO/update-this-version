@@ -1,4 +1,4 @@
-const { generateChangelog, writeChangelog, createCurrentReleaseFile } = require("./lib/changelog");
+const { generateChangelog, writeChangelog, writeCurrentRelease, generateContent } = require("./lib/changelog");
 const { readCommitHistory, getTagLatestVersion, createTag } = require("./lib/git");
 const { writePackageVersion } = require("./lib/package");
 const { calculateCommitWeights, determineVersionUpgrade } = require("./lib/weigth");
@@ -16,9 +16,10 @@ async function updateThisVersion() {
         console.log(`New Version: ${newVersion}`);
 
         writePackageVersion(newVersion)
-        const write = writeChangelog(changelog, newVersion);
-        const writeLatest = createCurrentReleaseFile(changelog, newVersion);
-        if (write) {
+        const content = generateContent(changelog, newVersion)
+        const write = writeChangelog(content);
+        const writeLatest = writeCurrentRelease(content);
+        if (write && writeLatest) {
             createTag(newVersion);
         }
         console.log(write)
