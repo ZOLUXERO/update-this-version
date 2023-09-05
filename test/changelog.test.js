@@ -125,6 +125,6 @@ describe('generateContent', () => {
         const content = generateContent(changelog, '0.0.1');
         expect(content).toContain('## VERSIONING: version 0.0.1 (2024-09-04)');
         expect(content).toContain('### feat:');
-        expect(content).toContain('- **message**  add git origin to message of commit ([bcc665f](https://github.com/ZOLUXERO/update-this-version/commit/bcc665f))');
+        expect(content).toContain('- **message:**  add git origin to message of commit ([bcc665f](https://github.com/ZOLUXERO/update-this-version/commit/bcc665f))');
     });
 });
