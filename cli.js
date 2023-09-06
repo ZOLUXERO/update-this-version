@@ -1,14 +1,29 @@
 #!/usr/bin/env node
 
-const yargs = require('yargs/yargs')
-const { hideBin } = require('yargs/helpers')
-const argv = yargs(hideBin(process.argv)).argv
+const yargs = require('yargs')
 
-// if (argv.ships > 3 && argv.distance < 53.5) {
-//   console.log('Plunder more riffiwobbles!')
-// } else {
-//   console.log('Retreat from the xupptumblers!')
-// }
+const argv = yargs
+  .usage('Usage: $0 [options]')
+  .option('first-release', {
+    alias: 'f',
+    description: 'Generate the first-release of your project',
+    type: 'boolean', 
+  })
+  .option('version-type', {
+    alias: 've',
+    description: 'Specify the version type manually (like npm version <major|minor|patch>)',
+    requiresArg: true,
+    string: true
+  })
+  .argv;
+
+if (argv.firstRelease) {
+  console.log('You used the --first-release option!');
+}
+
+if (argv.versionType == "major") {
+  console.log('You used the major patch type');
+}
 
 if (process.version.match(/v(\d+)\./)[1] < 6) {
   console.error('Update this version uses Node v8 or greater comamnd`update-this-version` did not run.')
