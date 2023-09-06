@@ -11,7 +11,6 @@
 ### fix:
 #### Historia de usuario [#34]()
 >- **test:** commit message ([5897cc5](https://github.com/ZOLUXERO/update-this-version/commit/5897cc5))
---------
 - **formating:**  on multiple HUs ([704ffe1](https://github.com/ZOLUXERO/update-this-version/commit/704ffe1))
 - **quote:**  double quote on scope of commit validate if scope is empty ([d22460b](https://github.com/ZOLUXERO/update-this-version/commit/d22460b))
 ### chore:
