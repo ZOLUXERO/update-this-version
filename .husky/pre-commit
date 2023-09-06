@@ -1,7 +1,6 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-# Define the list of valid commit types
 commitTypes=(
   'BREAKING CHANGE'
   'feat'
@@ -15,10 +14,8 @@ commitTypes=(
   'perf'
 )
 
-# Initialize an empty regular expression string
 typeRegex=""
 
-# Loop through the commit types and add them to the regex
 for type in "${commitTypes[@]}"; do
   if [ -n "$typeRegex" ]; then
     typeRegex="${typeRegex}|"
@@ -27,14 +24,12 @@ for type in "${commitTypes[@]}"; do
   typeRegex="${typeRegex}|${type}(.*)"
 done
 
-# Add the surrounding regex pattern for word boundaries
-typeRegex="(?<=\\w) (${typeRegex}):"
+typeRegex="(${typeRegex}):"
 
-# Get the commit message from the latest commit
 commit_msg=$(git log -1 --pretty=format:%s)
 
-# Check if the commit message matches the regex
 if ! [[ $commit_msg =~ $typeRegex ]]; then
-  echo "Error: Commit message does not match the required format"
+  echo "Error: Commit message does not match the required format:"
+  echo $typeRegex 
   exit 1
 fi
