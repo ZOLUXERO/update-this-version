@@ -6,7 +6,8 @@
   "bin": "./cli.js",
   "repository": "ttps://github.com/ZOLUXERO/update-this-version.git",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "prepare": "husky install"
   },
   "author": "Aureliano Buendia",
   "license": "ISC",
@@ -16,6 +17,7 @@
   },
   "devDependencies": {
     "-": "^0.0.1",
+    "husky": "^8.0.0",
     "jest": "^29.6.4"
   },
   "publishConfig": {
