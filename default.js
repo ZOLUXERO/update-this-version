@@ -8,7 +8,12 @@ const default_values = {
         'feat': [],
         'fix': [],
         'test': [],
-        'feature': [],
+        'chore': [],
+        'build': [],
+        'docs': [],
+        'style': [],
+        'refactor': [],
+        'perf': []
     },
     packageFile: 'package.json'
 }

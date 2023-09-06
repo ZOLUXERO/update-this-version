@@ -101,7 +101,6 @@ describe('generateChangelog', () => {
                     cleanedRemoteUrl: 'https://github.com/ZOLUXERO/update-this-version'
                 }
             ],
-            "feature": [],
             "test": []
         });
     });
