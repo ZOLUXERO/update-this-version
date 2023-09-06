@@ -28,8 +28,8 @@ typeRegex="(${typeRegex}):"
 
 commit_msg=$(git log -1 --pretty=format:%s)
 
+echo $typeRegex 
 if ! [[ $commit_msg =~ $typeRegex ]]; then
   echo "Error: Commit message does not match the required format:"
-  echo $typeRegex 
   exit 1
 fi
