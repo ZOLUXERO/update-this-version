@@ -1,0 +1,20 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Get the commit message
+commit_msg=$(git log -1 --pretty=format:%s)
+echo $commit_msg
+message=$(cat "$1")
+
+echo $message
+
+# Check if the word "feature" is in the message
+# if ! echo "$message" | grep -Eq "^(feat|fix|chore|test)\((.*[a-z]+)\):\s(.*)"; then
+if ! echo "$message" | grep -Eq "^(feat|fix|chore|test)(\(.*[a-z]+[^)]*\))?:\s*#([0-9]+)\s+([a-z]*)"; then
+  echo "Your current message commit: [${message}]"
+  echo "Must contain The Conventional Commits specification ex: feat(scope): description"
+  exit 1
+fi
+
+# The commit message is valid, so exit with success
+exit 0
