@@ -1,18 +1,14 @@
-## VERSIONING: version 1.2.0 (2023-09-06)
+## VERSIONING: version 1.3.0 (2023-09-09)
 
 ### feat:
-#### Historia de usuario [#34]()
->- **test:** commit message ([eec7c11](https://github.com/ZOLUXERO/update-this-version/commit/eec7c11))
-#### Historia de usuario [#35]()
->- **changelog:** add hu to formating of template and validate if template needs hu or its empty ([c66c707](https://github.com/ZOLUXERO/update-this-version/commit/c66c707))
->- **test:** commit message two ([a11d0f2](https://github.com/ZOLUXERO/update-this-version/commit/a11d0f2))
->- **test:** commit message ([f9ac524](https://github.com/ZOLUXERO/update-this-version/commit/f9ac524))
-
-### fix:
-#### Historia de usuario [#34]()
->- **test:** commit message ([5897cc5](https://github.com/ZOLUXERO/update-this-version/commit/5897cc5))
-- **formating:**  on multiple HUs ([704ffe1](https://github.com/ZOLUXERO/update-this-version/commit/704ffe1))
-- **quote:**  double quote on scope of commit validate if scope is empty ([d22460b](https://github.com/ZOLUXERO/update-this-version/commit/d22460b))
+#### Historia de usuario [#123]()
+>-  add commit-msg file to husky ([ec79c86](https://github.com/ZOLUXERO/update-this-version/commit/ec79c86))
+-   #123 test ([d8fa5c6](https://github.com/ZOLUXERO/update-this-version/commit/d8fa5c6))
+-   commit message ([28f3b03](https://github.com/ZOLUXERO/update-this-version/commit/28f3b03))
+- **yargs:**  add argumets to use with yargs ([9cbae24](https://github.com/ZOLUXERO/update-this-version/commit/9cbae24))
 ### chore:
-- **remove:**  unused file app.js ([ebc6d7e](https://github.com/ZOLUXERO/update-this-version/commit/ebc6d7e))
-- **update-this-version:**  update this version ([2bec50e](https://github.com/ZOLUXERO/update-this-version/commit/2bec50e))
+#### Historia de usuario [#123]()
+>- **husky:** add husky changes to repo ([b399b6c](https://github.com/ZOLUXERO/update-this-version/commit/b399b6c))
+- **release:**  update-this-version [skip ci] ([c38edc2](https://github.com/ZOLUXERO/update-this-version/commit/c38edc2))
+### style:
+-   remove unused code ([ae17cec](https://github.com/ZOLUXERO/update-this-version/commit/ae17cec))
