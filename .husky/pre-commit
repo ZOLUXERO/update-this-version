@@ -2,7 +2,7 @@
 . "$(dirname -- "$0")/_/husky.sh"
 
 # Get the commit message
-echo "aaaa"
+# echo "aaaa"
 # commit_msg=$(git log -1 --pretty=format:%s)
 # echo $commit_msg
 # message=$(cat "$1")

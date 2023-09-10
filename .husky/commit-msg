@@ -1,20 +1,46 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-# Get the commit message
 message=$(cat "$1")
 
-echo $message
+commitTypes=(
+  'BREAKING CHANGE'
+  'feat'
+  'fix'
+  'test'
+  'chore'
+  'build'
+  'docs'
+  'style'
+  'refactor'
+  'perf'
+)
 
-# Check if the word "feature" is in the message
-# if ! echo "$message" | grep -Eq "^(feat|fix|chore|test)\((.*[a-z]+)\):\s(.*)"; then
-if ! echo "$message" | grep -Eq "^(feat|fix|chore|test)(\(.*[a-z]+[^)]*\))?:\s*#([0-9]+)\s+([a-z]*)"; then
-  echo "|"
-  echo "|"
-  echo "| Your current message commit: [${message}]"
-  echo "| Must contain The Conventional Commits specification ex: feat(scope): description"
+typeRegex=""
+
+for type in "${commitTypes[@]}"; do
+  if [ -n "$typeRegex" ]; then
+    typeRegex="${typeRegex}|"
+  fi
+  typeRegex="${typeRegex}${type}"
+done
+
+# if ! echo "$message" | grep -Eq "^(feat|fix|chore|test)(\(.*[a-z]+[^)]*\))?:\s*#([0-9]+):\s+([a-z]*)"; then
+if ! echo "$message" | grep -Eq "^(${typeRegex})(\(.*[a-z]+[^)]*\))?:\s*#([0-9]+):\s+([a-z]*)"; then
+  echo "-"
+  echo "-"
+  echo "Error en el mensaje del commit!"
+  echo "El mensaje debe usar el formato de Conventional Commits"
+  echo "<tipo de tarea><(opcional) scope>: #<histora de usuario>: <descripcion de la tarea>\n"
+  echo "Ejemplos:"
+  echo "feat(login): #123: se agrega boton de login"
+  echo "feat: #123: se agrega boton de login\n"
+  echo "Su mensaje fue:"
+  echo "${message}\n"
+  echo "Los tipos de tarea acepatados son:"
+  echo "${typeRegex}\n"
+  echo "Para mas informacion revise: https://www.conventionalcommits.org/en/v1.0.0/ \n"
   exit 1
 fi
 
-# The commit message is valid, so exit with success
 exit 0
