@@ -27,7 +27,17 @@ async function updateThisVersion() {
 
 async function test() {
     const ver = getLatestReleaseVersion();
-    console.log("latest version release: ", ver);
+    const currentVersion = getTagLatestVersion();
+    const commits = readCommitHistory(ver);
+    if (commits.length > 0 && commits[0] != "") {
+        const changelog = generateChangelog(commits);
+        const content = generateContent(changelog, `${currentVersion}-p`);
+        const writeLatest = writeCurrentRelease(content);
+        if (writeLatest) {
+            createTag(`${currentVersion}-p`);
+        }
+        console.log("latest version release: ", ver, "current version: ", currentVersion);
+    }
 }
 
 module.exports = { updateThisVersion, test }
