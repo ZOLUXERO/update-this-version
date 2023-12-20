@@ -16,7 +16,7 @@ const argv = yargs
     string: true
   })
   .option('release', {
-    alias: 'f',
+    alias: 'r',
     description: 'Generate the first-release of your project',
     type: 'boolean', 
   })
@@ -28,6 +28,8 @@ if (argv.firstRelease) {
 
 if (argv.release) {
   console.log('RELEASE!');
+  const version = require('./index')
+  version.test();
 }
 
 if (argv.versionType == "major") {
@@ -37,6 +39,6 @@ if (argv.versionType == "major") {
 if (process.version.match(/v(\d+)\./)[1] < 6) {
   console.error('Update this version uses Node v8 or greater comamnd`update-this-version` did not run.')
 } else {
-  const version = require('./index')
-  version.updateThisVersion();
+  // const version = require('./index')
+  // version.updateThisVersion();
 }
