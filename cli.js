@@ -15,10 +15,19 @@ const argv = yargs
     requiresArg: true,
     string: true
   })
+  .option('release', {
+    alias: 'f',
+    description: 'Generate the first-release of your project',
+    type: 'boolean', 
+  })
   .argv;
 
 if (argv.firstRelease) {
   console.log('You used the --first-release option!');
+}
+
+if (argv.release) {
+  console.log('RELEASE!');
 }
 
 if (argv.versionType == "major") {

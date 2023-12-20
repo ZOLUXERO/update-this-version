@@ -7,7 +7,6 @@ async function updateThisVersion() {
     const commits = readCommitHistory();
     console.log("commit since", commits);
     if (commits.length > 0 && commits[0] != "") {
-
         const weightCounts = calculateCommitWeights(commits);
         const currentVersion = getTagLatestVersion();
         const newVersion = determineVersionUpgrade(weightCounts, currentVersion);
@@ -15,7 +14,7 @@ async function updateThisVersion() {
         console.log(`Current Version: ${currentVersion}`);
         console.log(`New Version: ${newVersion}`);
 
-        writePackageVersion(newVersion)
+        writePackageVersion(newVersion);
         const content = generateContent(changelog, newVersion)
         const write = writeChangelog(content);
         const writeLatest = writeCurrentRelease(content);
