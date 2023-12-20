@@ -1,3 +1,22 @@
+# PRODUCTION: Release #1.4.0-p
+## VERSIONING: version 1.4.0 (2023-12-20)
+
+### feat:
+- **prd:**  testing different changelogs ([9fa34e8](https://github.com/ZOLUXERO/update-this-version/commit/9fa34e8))
+- **content:**  generate content for current release only when using flag --release ([9acad8f](https://github.com/ZOLUXERO/update-this-version/commit/9acad8f))
+### test:
+- **code:**  wip ([7ddaced](https://github.com/ZOLUXERO/update-this-version/commit/7ddaced))
+- **code:**  wip ([8937c22](https://github.com/ZOLUXERO/update-this-version/commit/8937c22))
+- **code:**  wip ([9727ed4](https://github.com/ZOLUXERO/update-this-version/commit/9727ed4))
+- **code:**  husky ([59d4148](https://github.com/ZOLUXERO/update-this-version/commit/59d4148))
+### chore:
+#### Historia de usuario [#123]()
+>-  update-this-version [skip ci] ([3d003d5](https://github.com/ZOLUXERO/update-this-version/commit/3d003d5))
+
+### style:
+- **code:**  on cli, git and index ([5d5b1f2](https://github.com/ZOLUXERO/update-this-version/commit/5d5b1f2))
+
+
 ## VERSIONING: version 1.3.0 (2023-09-09)
 
 ### feat:
