@@ -12,12 +12,11 @@ function getGitUrlOrigin() {
     return remoteUrl.replace(/\.git$/, '');
 }
 
-function readCommitHistory(sinceTag = "") {
+function readCommitHistory(sinceTag: string = ""): string[] {
     let commitHistory = "";
     // El comando que trae los tags si no encuentra ningun tag retorna un array vacio como: ['']
     // validar cuando hay casos legitimos que traen ['', 'v0.0.1'] como primer tag
     if (sinceTag != "") return  execSync(`git log ${sinceTag}..main --oneline`, { encoding: 'utf-8' }).trim().split('\n');
-
     if (tags.length > 0 && tags[0] != '') {
         const latestTag = execSync('git describe --tags --abbrev=0', { encoding: 'utf-8' }).trim();
         // Get the commits since the latest tag
@@ -53,7 +52,7 @@ function getLatestReleaseVersion() {
     let latestReleaseVersion = "0.0.0";
     if (tags.length <= 0 && tags[0] == '') return latestReleaseVersion;
     try {
-        latestReleaseVersion = execSync('git describe --tags --abbrev=0 --match="*p" $(git rev-list --tags --skip=0 --max-count=1)', {encoding: 'utf-8'}).trim();
+        latestReleaseVersion = execSync('git describe --tags --abbrev=0 --match="*p" $(git rev-list --tags --skip=1 --max-count=1)', {encoding: 'utf-8'}).trim();
     } catch (error) {
         latestReleaseVersion = execSync('git for-each-ref --sort=creatordate --count=1 refs/tags --format "%(refname:lstrip=2)"', { encoding: 'utf-8' }).trim();
         console.log("Error: (there's no git tag that matches '*p') ", error);
