@@ -1,5 +1,5 @@
 const { generateChangelog, writeChangelog, writeCurrentRelease, generateContent } = require("./lib/changelog");
-const { readCommitHistory, getTagLatestVersion, createTag } = require("./lib/git");
+const { readCommitHistory, getTagLatestVersion, createTag, getLatestReleaseVersion } = require("./lib/git");
 const { writePackageVersion } = require("./lib/package");
 const { calculateCommitWeights, determineVersionUpgrade } = require("./lib/weigth");
 
@@ -25,4 +25,9 @@ async function updateThisVersion() {
     }
 }
 
-module.exports = { updateThisVersion }
+async function test() {
+    const ver = getLatestReleaseVersion();
+    console.log("latest version release: ", ver);
+}
+
+module.exports = { updateThisVersion, test }
