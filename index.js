@@ -1,4 +1,4 @@
-const { generateChangelog, writeChangelog, writeCurrentRelease, generateContent } = require("./lib/changelog");
+const { generateChangelog, writeChangelog, writeCurrentRelease, generateContent, writeChangelogprd } = require("./lib/changelog");
 const { readCommitHistory, getTagLatestVersion, createTag, getLatestReleaseVersion } = require("./lib/git");
 const { writePackageVersion } = require("./lib/package");
 const { calculateCommitWeights, determineVersionUpgrade } = require("./lib/weigth");
@@ -17,8 +17,7 @@ async function updateThisVersion() {
         writePackageVersion(newVersion);
         const content = generateContent(changelog, newVersion)
         const write = writeChangelog(content);
-        const writeLatest = writeCurrentRelease(content);
-        if (write && writeLatest) {
+        if (write) {
             createTag(newVersion);
         }
         console.log(write)
@@ -26,13 +25,15 @@ async function updateThisVersion() {
 }
 
 async function test() {
+    console.log("==============================================================");
     const ver = getLatestReleaseVersion();
     const currentVersion = getTagLatestVersion();
     const commits = readCommitHistory(ver);
     if (commits.length > 0 && commits[0] != "") {
-        const changelog = generateChangelog(commits);
-        const content = generateContent(changelog, `${currentVersion}-p`);
+        const changelogsito = generateChangelog(commits);
+        const content = generateContent(changelogsito, `${currentVersion}-p`);
         const writeLatest = writeCurrentRelease(content);
+        writeChangelogprd(`${currentVersion}-p`);
         if (writeLatest) {
             createTag(`${currentVersion}-p`);
         }
