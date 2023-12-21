@@ -2,7 +2,7 @@ const default_values = {
     releasesFile: 'CHANGELOG.md',
     currentReleaseFile: 'CURRENT_RELEASE.md',
     encoding: 'utf-8',
-    versionTitle: 'VERSIONING: version',
+    versionTitle: 'VERSION: ',
     conventionalCommits: {
         'BREAKING CHANGE': [],
         'feat': [],
