@@ -1,3 +1,4 @@
+# <span style="color:#6495ED;">PRODUCTION: Release #1.9.4-p</span>
 ## VERSIONING: version 1.9.4 (2023-12-21)
 
 ### docs:
