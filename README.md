@@ -33,6 +33,8 @@ Lets say the project finds a **"BREAKING CHANGE"** and a **"feat"** it will go u
     - patch
 
 ## usage
+general rule is you should do a full release or a normal release and then a release to prd, doing it separatly its used when you dont wanna release every version to production and want to do it in a separate job in you ci/cd pipeline
+
 ```
 npm i -g update-this-version
 update-this-version // create a release aimed to dev env
