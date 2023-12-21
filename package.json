@@ -1,6 +1,6 @@
 {
   "name": "update-this-version",
-  "version": "1.7.1",
+  "version": "1.7.2",
   "description": "Update this version using Semantic versioning",
   "main": "default.js",
   "bin": "./cli.js",
