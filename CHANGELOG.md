@@ -1,3 +1,9 @@
+## VERSIONING: version 1.9.4 (2023-12-21)
+
+### docs:
+- **code:**  readme ([a45e77d](https://github.com/ZOLUXERO/update-this-version/commit/a45e77d22afbaf6a02a1c67b3c993993aa361e23))
+
+
 ## VERSIONING: version 1.9.3 (2023-12-21)
 
 ### feat:
