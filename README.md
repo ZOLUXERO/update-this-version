@@ -1,6 +1,8 @@
 # update-this-version
 Update this version using Semantic versioning
 
+Automatically adds and commits the changelog and current_release changes
+
 You can make use of the **User History**(only for azure devops) feature where every commit using a syntax like:
 `feat(test): #35: commit message` or `feat: #35: add commit message`. Will group all tasks with [#35]() under a only User history and link the work item to in this case an azure devops item.
 
@@ -29,8 +31,6 @@ Lets say the project finds a **"BREAKING CHANGE"** and a **"feat"** it will go u
     - major
     - minor
     - patch
-
-2) Automatic add and commit when creating a tag
 
 ## usage
 ```
