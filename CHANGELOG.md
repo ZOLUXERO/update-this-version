@@ -1,31 +1,31 @@
 # <span style="color:#6495ED;">PRODUCTION: Release #1.9.4-p</span>
-## VERSIONING: version 1.9.4 (2023-12-21)
+## VERSION: 1.9.4 (2023-12-21)
 
 ### docs:
 - **code:**  readme ([a45e77d](https://github.com/ZOLUXERO/update-this-version/commit/a45e77d22afbaf6a02a1c67b3c993993aa361e23))
 
 
-## VERSIONING: version 1.9.3 (2023-12-21)
+## VERSION: 1.9.3 (2023-12-21)
 
 ### feat:
 - **argv:**  new arguments for type of release ([b31fe5b](https://github.com/ZOLUXERO/update-this-version/commit/b31fe5bee8a5f4c36c506b270d9a3d1ea758de98))
 
 
 # <span style="color:#6495ED;">PRODUCTION: Release #1.8.3-p</span>
-## VERSIONING: version 1.8.3 (2023-12-21)
+## VERSION: 1.8.3 (2023-12-21)
 
 ### feat:
 - **git:**  automatically add and commit latest changes made to changelog and current_release ([ab4a4fb](https://github.com/ZOLUXERO/update-this-version/commit/ab4a4fbf067138b2e989513e288d7922e9956dc9))
 
 
-## VERSIONING: version 1.7.3 (2023-12-21)
+## VERSION: 1.7.3 (2023-12-21)
 
 ### chore:
 - **release:**  v1.7.2-p [skip ci] ([7a1d57a](https://github.com/ZOLUXERO/update-this-version/commit/7a1d57ad2587a1222217fbfb123f9fc6867560fd))
 
 
 # <span style="color:#6495ED;">PRODUCTION: Release #1.7.2-p</span>
-## VERSIONING: version 1.7.2 (2023-12-20)
+## VERSION: 1.7.2 (2023-12-20)
 
 ### chore:
 - **release:**  v1.7.1 [skip ci] ([40783f4](https://github.com/ZOLUXERO/update-this-version/commit/40783f4))
@@ -34,7 +34,7 @@
 
 
 # <span style="color:#6495ED;">PRODUCTION: Release #1.7.1-p</span>
-## VERSIONING: version 1.7.1 (2023-12-20)
+## VERSION: 1.7.1 (2023-12-20)
 
 ### chore:
 - **release:**  v1.7.0 [skip ci] ([d5d7dab](https://github.com/ZOLUXERO/update-this-version/commit/d5d7dab))
@@ -42,7 +42,7 @@
 - **code:**  readme ([11c14a1](https://github.com/ZOLUXERO/update-this-version/commit/11c14a1))
 
 
-## VERSIONING: version 1.7.0 (2023-12-20)
+## VERSION: 1.7.0 (2023-12-20)
 
 ### feat:
 - **code:**  readme ([5a1d400](https://github.com/ZOLUXERO/update-this-version/commit/5a1d400))
@@ -51,7 +51,7 @@
 
 
 # <span style="color:#6495ED;">PRODUCTION: Release #1.6.0-p</span>
-## VERSIONING: version 1.6.0 (2023-12-20)
+## VERSION: 1.6.0 (2023-12-20)
 
 ### feat:
 - **code:**  remove logs ([ec11374](https://github.com/ZOLUXERO/update-this-version/commit/ec11374))
@@ -60,7 +60,7 @@
 
 
 # PRODUCTION: Release #1.5.0-p
-## VERSIONING: version 1.5.0 (2023-12-20)
+## VERSION: 1.5.0 (2023-12-20)
 
 ### feat:
 - **code:**  readme ([909b557](https://github.com/ZOLUXERO/update-this-version/commit/909b557))
@@ -69,7 +69,7 @@
 
 
 # <span style="color:#6495ED;">PRODUCTION: Release #1.4.0-p</span>
-## VERSIONING: version 1.4.0 (2023-12-20)
+## VERSION: 1.4.0 (2023-12-20)
 
 ### feat:
 - **prd:**  testing different changelogs ([9fa34e8](https://github.com/ZOLUXERO/update-this-version/commit/9fa34e8))
@@ -87,7 +87,7 @@
 - **code:**  on cli, git and index ([5d5b1f2](https://github.com/ZOLUXERO/update-this-version/commit/5d5b1f2))
 
 
-## VERSIONING: version 1.3.0 (2023-09-09)
+## VERSION: 1.3.0 (2023-09-09)
 
 ### feat:
 #### Historia de usuario [#123]()
@@ -103,7 +103,7 @@
 -   remove unused code ([ae17cec](https://github.com/ZOLUXERO/update-this-version/commit/ae17cec))
 
 
-## VERSIONING: version 1.2.0 (2023-09-06)
+## VERSION: 1.2.0 (2023-09-06)
 
 ### feat:
 #### Historia de usuario [#34]()
@@ -123,7 +123,7 @@
 - **update-this-version:**  update this version ([2bec50e](https://github.com/ZOLUXERO/update-this-version/commit/2bec50e))
 
 
-## VERSIONING: version 1.1.0 (2023-09-05)
+## VERSION: 1.1.0 (2023-09-05)
 
 ### feat:
 - **npm**  publish package to npm github repository ([8d653e1](https://github.com/ZOLUXERO/update-this-version/commit/8d653e1))
@@ -138,7 +138,7 @@
 - **logic**  whitout package.json ([5ff19af](https://github.com/ZOLUXERO/update-this-version/commit/5ff19af))
 
 
-## VERSIONING: version 1.0.0 (2023-09-01)
+## VERSION: 1.0.0 (2023-09-01)
 
 ### BREAKING CHANGE:
 - ****  init repo and create first script default.js ([12311ae](http://test.com))
