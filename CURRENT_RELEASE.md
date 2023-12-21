@@ -1,6 +1,6 @@
-## VERSIONING: version 1.5.0-p (2023-12-20)
+## VERSIONING: version 1.6.0-p (2023-12-20)
 
 ### feat:
-- **code:**  readme ([909b557](https://github.com/ZOLUXERO/update-this-version/commit/909b557))
+- **code:**  remove logs ([ec11374](https://github.com/ZOLUXERO/update-this-version/commit/ec11374))
 ### chore:
-- **release:**  v1.4.0-p [skip ci] ([161b71b](https://github.com/ZOLUXERO/update-this-version/commit/161b71b))
+- **release:**  v1.5.0-p [skip ci] ([bffaa1a](https://github.com/ZOLUXERO/update-this-version/commit/bffaa1a))
