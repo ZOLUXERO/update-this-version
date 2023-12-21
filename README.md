@@ -6,6 +6,7 @@ npm i -g update-this-version
 npm i -g update-this-version --release
 git add .
 git commit -m "chore(release): version [skip ci]"
+git push -u origin main --tags
 ```
 
 ## usage:
