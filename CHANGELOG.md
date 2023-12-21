@@ -1,3 +1,9 @@
+## VERSIONING: version 1.7.3 (2023-12-21)
+
+### chore:
+- **release:**  v1.7.2-p [skip ci] ([7a1d57a](https://github.com/ZOLUXERO/update-this-version/commit/7a1d57ad2587a1222217fbfb123f9fc6867560fd))
+
+
 # PRODUCTION: Release #1.7.2-p
 ## VERSIONING: version 1.7.2 (2023-12-20)
 
