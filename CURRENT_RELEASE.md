@@ -1,6 +1,4 @@
-## VERSIONING: version 1.7.2-p (2023-12-20)
+## VERSIONING: version 1.8.3-p (2023-12-21)
 
-### chore:
-- **release:**  v1.7.1 [skip ci] ([40783f4](https://github.com/ZOLUXERO/update-this-version/commit/40783f4))
-### docs:
-- **code:**  readme cli ([4a25f75](https://github.com/ZOLUXERO/update-this-version/commit/4a25f75))
+### feat:
+- **git:**  automatically add and commit latest changes made to changelog and current_release ([ab4a4fb](https://github.com/ZOLUXERO/update-this-version/commit/ab4a4fbf067138b2e989513e288d7922e9956dc9))
