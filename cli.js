@@ -1,4 +1,10 @@
 #!/usr/bin/env node
+// ## usage dev:
+// ```
+// update-this-version
+// node ./cli.js
+// node ./cli.js --release
+// ```
 
 const yargs = require('yargs')
 
