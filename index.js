@@ -37,7 +37,7 @@ async function test() {
         if (writeLatest) {
             createTag(`${currentVersion}-p`);
         }
-        console.log("latest version release: ", ver, "current version: ", currentVersion);
+        console.log("Release changelog created from version: ", ver, "current version: ", currentVersion);
     }
 }
 
