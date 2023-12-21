@@ -1,3 +1,12 @@
+# PRODUCTION: Release #1.7.1-p
+## VERSIONING: version 1.7.1 (2023-12-20)
+
+### chore:
+- **release:**  v1.7.0 [skip ci] ([d5d7dab](https://github.com/ZOLUXERO/update-this-version/commit/d5d7dab))
+### docs:
+- **code:**  readme ([11c14a1](https://github.com/ZOLUXERO/update-this-version/commit/11c14a1))
+
+
 ## VERSIONING: version 1.7.0 (2023-12-20)
 
 ### feat:
