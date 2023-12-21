@@ -31,7 +31,7 @@ const argv = yargs
     })
     .option('release', {
         alias: 'r',
-        description: 'Generate a release of your project with a production tag',
+        description: 'Generate a release for your project',
         type: 'boolean',
     })
     .option('commit-msg', {
@@ -39,6 +39,16 @@ const argv = yargs
         description: 'Customize the commit message used to commit the changelog',
         requiresArg: true,
         string: true
+    })
+    .option('full-release', {
+        alias: 'fr',
+        description: 'Generate a release for your project using production tags',
+        type: 'boolean',
+    })
+    .option('release-prd', {
+        alias: 'rp',
+        description: 'Generate a release for your project aimed only to production',
+        type: 'boolean',
     })
     .argv;
 
@@ -55,10 +65,11 @@ if (argv.commitMsg) message = argv.commitMsg;
 if (process.version.match(/v(\d+)\./)[1] < 6) {
     console.error('Update this version uses Node v8 or greater comamnd`update-this-version` did not run.')
 } else {
-    version.updateThisVersion(message);
-}
+    if (argv.release || argv.fullRelease || JSON.stringify(argv).match(/,/g).length == 1) {
+        version.updateThisVersion(message);
+    }
 
-if (argv.release) {
-    console.log('RELEASE!');
-    version.updateThisVersionPrd(message);
+    if(argv.releasePrd || argv.fullRelease) {
+        version.updateThisVersionPrd(message);
+    }
 }
