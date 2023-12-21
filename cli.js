@@ -6,6 +6,12 @@
 // node ./cli.js --release
 // ```
 
+/**
+ * To publish use:
+ * npm config set registry https://registry.npmjs.org/
+ * npm login
+ * npm publish
+ */
 const yargs = require('yargs')
 
 const argv = yargs
