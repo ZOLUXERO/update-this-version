@@ -34,8 +34,9 @@ Lets say the project finds a **"BREAKING CHANGE"** and a **"feat"** it will go u
 
 ## usage
 ```
-npm i -g update-this-version // create a release aimed to dev env
-npm i -g update-this-version --release // create a release aimed to prod env
+npm i -g update-this-version
+update-this-version // create a release aimed to dev env
+update-this-version --release // create a release aimed to prod env
 git add .
 git commit -m "chore(release): version [skip ci]"
 git push -u origin main --tags
