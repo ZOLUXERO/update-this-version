@@ -13,13 +13,15 @@ async function updateThisVersion(message) {
         const changelog = generateChangelog(commits);
         console.log(`Current Version: ${currentVersion}`);
         console.log(`New Version: ${newVersion}`);
+        console.log("see changelog empty: ", changelog);
 
         writePackageVersion(newVersion);
-        const content = generateContent(changelog, newVersion)
+        const content = generateContent(changelog, newVersion);
+        console.log(content);
         const write = writeChangelog(content);
         if (write) {
             createTag(newVersion);
-            addAndCommit(message, `${currentVersion}`);
+            addAndCommit(message, `${newVersion}`);
         }
         console.log(write)
     }
@@ -32,6 +34,7 @@ async function updateThisVersionPrd(message) {
     const commits = readCommitHistory(ver);
     if (commits.length > 0 && commits[0] != "") {
         const changelogsito = generateChangelog(commits);
+        console.log("see changelog empty: ", changelogsito);
         const content = generateContent(changelogsito, `${currentVersion}-p`);
         const writeLatest = writeCurrentRelease(content);
         writeChangelogprd(`${currentVersion}-p`);
