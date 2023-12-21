@@ -1,3 +1,9 @@
+## VERSIONING: version 1.9.3 (2023-12-21)
+
+### feat:
+- **argv:**  new arguments for type of release ([b31fe5b](https://github.com/ZOLUXERO/update-this-version/commit/b31fe5bee8a5f4c36c506b270d9a3d1ea758de98))
+
+
 # <span style="color:#6495ED;">PRODUCTION: Release #1.8.3-p</span>
 ## VERSIONING: version 1.8.3 (2023-12-21)
 
