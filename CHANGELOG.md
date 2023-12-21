@@ -11,7 +11,7 @@
 - **release:**  v1.7.2-p [skip ci] ([7a1d57a](https://github.com/ZOLUXERO/update-this-version/commit/7a1d57ad2587a1222217fbfb123f9fc6867560fd))
 
 
-# PRODUCTION: Release #1.7.2-p
+# <span style="color:#6495ED;">PRODUCTION: Release #1.7.2-p</span>
 ## VERSIONING: version 1.7.2 (2023-12-20)
 
 ### chore:
@@ -20,7 +20,7 @@
 - **code:**  readme cli ([4a25f75](https://github.com/ZOLUXERO/update-this-version/commit/4a25f75))
 
 
-# PRODUCTION: Release #1.7.1-p
+# <span style="color:#6495ED;">PRODUCTION: Release #1.7.1-p</span>
 ## VERSIONING: version 1.7.1 (2023-12-20)
 
 ### chore:
@@ -37,7 +37,7 @@
 - **release:**  v1.6.0-p [skip ci] ([b001188](https://github.com/ZOLUXERO/update-this-version/commit/b001188))
 
 
-# PRODUCTION: Release #1.6.0-p
+# <span style="color:#6495ED;">PRODUCTION: Release #1.6.0-p</span>
 ## VERSIONING: version 1.6.0 (2023-12-20)
 
 ### feat:
@@ -55,7 +55,7 @@
 - **release:**  v1.4.0-p [skip ci] ([161b71b](https://github.com/ZOLUXERO/update-this-version/commit/161b71b))
 
 
-# PRODUCTION: Release #1.4.0-p
+# <span style="color:#6495ED;">PRODUCTION: Release #1.4.0-p</span>
 ## VERSIONING: version 1.4.0 (2023-12-20)
 
 ### feat:
