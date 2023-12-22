@@ -31,7 +31,7 @@ async function updateThisVersionPrd(message) {
     console.log("==============================================================");
     let ver = getLatestReleaseVersion();
     let currentVersion = getTagLatestVersion();
-    if (currentVersion = '0.0.0') currentVersion = ver;
+    if (currentVersion == '0.0.0') currentVersion = ver;
     const commits = readCommitHistory(ver);
     if (commits.length > 0 && commits[0] != "") {
         const changelogsito = generateChangelog(commits);
