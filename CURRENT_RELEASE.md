@@ -1,4 +1,4 @@
-## VERSION:  1.11.2-p (2023-12-22)
+## VERSION:  1.11.3-p (2023-12-22)
 
-### fix:
-- **version:**  when there's no tags create current_release with latest created version ([ca14a2d](https://github.com/ZOLUXERO/update-this-version/commit/ca14a2d790828831f1c872952eb8b061c773d135))
+### test:
+- **code:**  wip ([e8c765c](https://github.com/ZOLUXERO/update-this-version/commit/e8c765c8d4791b5f975fb6ddd6e43e3e12b7301e))
