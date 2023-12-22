@@ -21,7 +21,7 @@ async function updateThisVersion(message) {
         const write = writeChangelog(content);
         if (write) {
             createTag(newVersion);
-            addAndCommit(message, `${newVersion}`);
+            addAndCommit(message, `${newVersion}`, './CHANGELOG.md ./package.json');
         }
         console.log(write)
     }
@@ -40,7 +40,7 @@ async function updateThisVersionPrd(message) {
         writeChangelogprd(`${currentVersion}-p`);
         if (writeLatest) {
             createTag(`${currentVersion}-p`);
-            addAndCommit(message, `${currentVersion}-p`);
+            addAndCommit(message, `${currentVersion}-p`, './CHANGELOG.md ./CURRENT_RELEASE.md ./package.json');
         }
         console.log("Release changelog created from version: ", ver, "current version: ", currentVersion);
     }
