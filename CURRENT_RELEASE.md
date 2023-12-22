@@ -1,4 +1,4 @@
-## VERSION:  1.11.1-p (2023-12-22)
+## VERSION:  1.11.2-p (2023-12-22)
 
 ### fix:
-- **current_release:**  file doesn't create if add and commit fails ([a9aed69](https://github.com/ZOLUXERO/update-this-version/commit/a9aed69ce722eaba0057d1250d5e110b43ca482a))
+- **version:**  when there's no tags create current_release with latest created version ([ca14a2d](https://github.com/ZOLUXERO/update-this-version/commit/ca14a2d790828831f1c872952eb8b061c773d135))
