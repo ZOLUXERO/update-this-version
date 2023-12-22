@@ -1,3 +1,4 @@
+# <span style="color:#6495ED;">PRODUCTION: Release #1.12.0-p</span>
 ### VERSION:  1.12.0 (2023-12-22)
 
 ### feat:
