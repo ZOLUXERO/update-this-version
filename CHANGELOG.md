@@ -1,3 +1,9 @@
+## VERSION:  1.11.3 (2023-12-22)
+
+### test:
+- **code:**  wip ([e8c765c](https://github.com/ZOLUXERO/update-this-version/commit/e8c765c8d4791b5f975fb6ddd6e43e3e12b7301e))
+
+
 # <span style="color:#6495ED;">PRODUCTION: Release #1.11.2-p</span>
 ## VERSION:  1.11.2 (2023-12-22)
 
